@@ -30,9 +30,34 @@ public class ProfessorDao {
 	}
 
 	public static void alterar(String matricula, String nome) {
+		
+			EntityManager em = emf.createEntityManager();
+ 		   em.getTransaction().begin();
+
+  		  //recupera a instância do EntityManager
+  		  Professor professor = em.find(Professor.class, matricula);
+		  	professor.setNome(nome);
+
+ 		em.persist(professor);
+		em.getTransaction().commit();
+ 		   em.close(); 
+		
+		
 	}
 
 	public static void excluir(String matricula) {
+		
+	EntityManager em = emf.createEntityManager();
+    em.getTransaction().begin();
+
+    //recupera a instância do EntityManager
+    Professor professor = em.find(Professor.class, matricula);
+
+    em.remove(professor);
+    em.getTransaction().commit();
+    em.close();  
+		
+		
 	}
 
 	public static List<Professor> listar() {
